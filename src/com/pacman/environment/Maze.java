@@ -1,27 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pacman.entorno;
+
+package com.pacman.environment;
 
 /**
- *
- * @author edson
+ * draws the number of maze and the pixels of each block
+ * @author Royce de la Cruz
  */
-public class Laberinto {
-    // pixeles de cada bloque
-    private final int LARGO_IMAGENES = 10;
-    private final int ALTURA_IMAGENES = 10;
-    // numero de laberinto a dibujar
+public class Maze {
+    // pixels of each block
+    private final int ImageLength = 10;
+    private final int ImageHeight = 10;
+    // Maze number to draw
     static int n;
 
-    public Laberinto(int numLaberinto) {
-        Laberinto.n = numLaberinto;
+    public Maze(int numMaze) {
+        Maze.n = numMaze;
     }
 
-    // posicion de los bloques a dibujar
-    private final String LaberintoA[][][] = {{
+    /**
+     * Blocks in the mazes
+     */
+    private final String MazeA[][][] = {{
         {"ESI", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "EII", "CA", "CA", "ESI", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "EII"},
         {"AR", "ME", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "ME", "ME", "ME", "AB", "CA", "CA", "AR", "ME", "ME", "ME", "DE", "DE", "DE", "DE", "DE", "DE", "ME", "ME", "DE", "DE", "DE", "DE", "DE", "DE", "ME", "AB"},
         {"AR", "AB", "1", "3", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "AR", "ME", "ME", "AB", "CA", "CA", "AR", "ME", "ME", "AB", "CA", "CA", "CA", "CA", "CA", "CA", "AR", "AB", "CA", "CA", "CA", "CA", "1", "3", "AR", "AB"},
@@ -145,8 +143,10 @@ public class Laberinto {
         {"AR", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "IZ", "AB",},
         {"ESD", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "DE", "EID",},}
     };
-    // camino libre para recorrer
-    private final boolean LaberintoF[][][] = {{
+    /**
+     * Series of the boolean values that determines where the maze is passable
+     */
+    private final boolean MazeF[][][] = {{
         {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true},
         {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true},
         {true, true, true, true, false, false, false, false, false, false, false, false, false, false, true, true, true, true, false, false, true, true, true, true, false, false, false, false, false, false, true, true, false, false, false, false, true, true, true, true},
@@ -272,35 +272,46 @@ public class Laberinto {
         {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,},}
 
     };
-
-    public int DevolverLargoImagenes() {
-        return LARGO_IMAGENES;
+	/**
+	 * Returns the length of the image
+	 */
+    public int ReturnLengthImages() {
+    
+        return ImageLength;
+    }
+    /**
+	 * Returns the height of the image
+	 */
+    public int ReturnHeightImages() {
+        return ImageHeight;
+    }
+    /**
+	 * Returns the quantity of Row of the Maze
+	 */
+    public int ReturnAmountofRowsMaze() {
+        return MazeA[n].length;
+    }
+    /**
+	 * Returns the length of column of the Maze
+	 */
+    public int ReturnAmountofColumnsMaze() {
+        return MazeA[n][0].length;
+    }
+    /**
+   	 * Returns the image of the Maze
+   	 */
+    public String ReturnMazeImageCode(int Row, int Column) {
+        return MazeA[n][Row][Column];
     }
 
-    public int DevolverAlturaImagenes() {
-        return ALTURA_IMAGENES;
-    }
+    public String[][] MazeActual() {
 
-    public int DevolverCantidadFilasLaberinto() {
-        return LaberintoA[n].length;
-    }
-
-    public int DevolverCantidadColumnasLaberinto() {
-        return LaberintoA[n][0].length;
-    }
-
-    public String DeolverCodigoImagenMatriz(int Fila, int Columna) {
-        return LaberintoA[n][Fila][Columna];
-    }
-
-    public String[][] LaberintoActual() {
-
-        return LaberintoA[n];
+        return MazeA[n];
 
     }
-    public boolean[][] LaberintoFinal() {
+    public boolean[][] MazeFinal() {
 
-        return LaberintoF[n];
+        return MazeF[n];
     }
 
 }
